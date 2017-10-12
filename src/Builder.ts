@@ -13,14 +13,14 @@ export function Builder<T>(): IBuilder<T>
 
         get(target, prop, receiver)
         {
-            if (prop === 'build')
+            if ('build' === prop)
             {
                 return () => built;
             }
 
             return (x: any): any =>
             {
-                (built[prop] = x);
+                built[prop] = x;
                 return builder;
             };
         }
