@@ -1,0 +1,38 @@
+{
+  "name": "builder-pattern",
+  "repository": "https://github.com/Vincent-Pang/builder-pattern.git",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "prepublishOnly": "tsc --declaration --outDir dist"
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+    "collectCoverage": true,
+    "mapCoverage": true,
+    "coverageDirectory": "test_coverage_dir",
+    "collectCoverageFrom": [
+      "src/**/*.tsx",
+      "src/**/*.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.2",
+    "ts-jest": "^21.1.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
+  }
+}
