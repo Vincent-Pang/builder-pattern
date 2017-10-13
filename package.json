@@ -1,7 +1,7 @@
 {
   "name": "builder-pattern",
   "repository": "https://github.com/Vincent-Pang/builder-pattern.git",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -14,7 +14,10 @@
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/"],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/"
+    ],
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
     "collectCoverage": true,
     "mapCoverage": true,
