@@ -4,10 +4,8 @@
 node_modules/
 /src/**/*.js
 /src/**/*.js.map
-/src/**/*.d.ts
 /__tests__/**/*.js
 /__tests__/**/*.js.map
-/__tests__/**/*.d.ts
 /test_coverage_dir
 /dist/
 /package/
