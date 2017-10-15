@@ -10,7 +10,6 @@ yarn add builder-pattern
 
 ## Usage
 
-You have an UserInfo interface
 ```
 interface UserInfo
 {
@@ -18,34 +17,12 @@ interface UserInfo
     userName: string;
     email: string;
 }
-```
 
-Without builder-pattern, you may initialize the object like this.
-```
-const userInfo: UserInfo = {} as any;
-
-userInfo.id = 1;
-userInfo.userName = 'Vincent';
-userInfo.email = 'abc@abc.com';
-```
-
-And you want an immutable object later, so you do this.
-```
-const userInfo: Readonly<UserInfo> = {} as any;
-
-userInfo.id = 1;  // TS2540:Cannot assign to 'id' because it is a constant or a read-only property.
-
-// you must initialize the obj like this
-const userInfo: Readonly<UserInfo> = {id: 1, userName: 'Vincent', email: 'abc@abc.com'};
-```
-
-Or with builder-pattern, you can initialize the object like this.
-```
-const userInfo: Readonly<UserInfo> = Builder<UserInfo>()
-                                        .id(1)
-                                        .userName('Vincent')
-                                        .email('abc@abc.com')
-                                        .build();
+const userInfo = Builder<UserInfo>()
+                     .id(1)
+                     .userName('Vincent')
+                     .email('abc@abc.com')
+                     .build();
 ```
 
 ## Contributing
