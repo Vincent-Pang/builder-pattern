@@ -35,16 +35,17 @@ const userInfo: Readonly<UserInfo> = {} as any;
 
 userInfo.id = 1;  // TS2540:Cannot assign to 'id' because it is a constant or a read-only property.
 
+// you must initialize the obj like this
+const userInfo: Readonly<UserInfo> = {id: 1, userName: 'Vincent', email: 'abc@abc.com'};
 ```
 
-With builder-pattern, you can initialize the object like this.
+Or with builder-pattern, you can initialize the object like this.
 ```
 const userInfo: Readonly<UserInfo> = Builder<UserInfo>()
                                         .id(1)
                                         .userName('Vincent')
                                         .email('abc@abc.com')
                                         .build();
-
 ```
 
 ## Contributing
