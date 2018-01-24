@@ -11,18 +11,17 @@ yarn add builder-pattern
 ## Usage
 
 ```
-interface UserInfo
-{
-    id: number;
-    userName: string;
-    email: string;
+interface UserInfo {
+  id: number;
+  userName: string;
+  email: string;
 }
 
 const userInfo = Builder<UserInfo>()
-                     .id(1)
-                     .userName('Vincent')
-                     .email('abc@abc.com')
-                     .build();
+                   .id(1)
+                   .userName('Vincent')
+                   .email('abc@abc.com')
+                   .build();
 ```
 
 ## Contributing

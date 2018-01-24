@@ -1,31 +1,28 @@
-export type IBuilder<T> =
-{
-    [k in keyof T]: (arg: T[k]) => IBuilder<T>
+export type IBuilder<T> = {
+  [k in keyof T]: (arg: T[k]) => IBuilder<T>
 }
 & {
-    build(): T
+  build(): T
 };
 
-export function Builder<T>(): IBuilder<T>
-{
-    const built: any = {};
-    const builder = new Proxy({}, {
+export function Builder<T>(): IBuilder<T> {
+  const built: any = {};
 
-        get(target, prop, receiver)
-        {
-            if ('build' === prop)
-            {
-                return () => built;
-            }
-
-            return (x: any): any =>
-            {
-                built[prop] = x;
-                return builder;
-            };
+  const builder = new Proxy(
+    {},
+    {
+      get(target, prop, receiver) {
+        if ('build' === prop) {
+          return () => built;
         }
 
-    });
+        return (x: any): any => {
+          built[prop] = x;
+          return builder;
+        };
+      }
+    }
+  );
 
-    return builder as any;
+  return builder as any;
 }
