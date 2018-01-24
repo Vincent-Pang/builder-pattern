@@ -1,17 +1,17 @@
 {
-    "compilerOptions": {
-        "target": "ES2016",
-        "module": "CommonJS",
-        "moduleResolution": "Node",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "removeComments": false,
-        "strict": true,
-        "declaration": false
-    },
-    "include": [
-        "src/**/*.ts",
-        "__tests__/**/*.ts"
-    ]
+  "compilerOptions": {
+    "target": "ES2016",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "strict": true,
+    "declaration": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "__tests__/**/*.ts"
+  ]
 }
