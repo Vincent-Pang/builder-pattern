@@ -5,8 +5,8 @@ export type IBuilder<T> = {
   build(): T
 };
 
-export function Builder<T>(): IBuilder<T> {
-  const built: any = {};
+export function Builder<T>(template?: T): IBuilder<T> {
+  const built: any = template ? template : {};
 
   const builder = new Proxy(
     {},
@@ -24,5 +24,5 @@ export function Builder<T>(): IBuilder<T> {
     }
   );
 
-  return builder as any;
+  return builder as IBuilder<T>;
 }
