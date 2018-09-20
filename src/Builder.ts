@@ -6,7 +6,7 @@ export type IBuilder<T> = {
 };
 
 export function Builder<T>(template?: T): IBuilder<T> {
-  const built: any = template ? template : {};
+  const built: any = template ? Object.assign({}, template) : {};
 
   const builder = new Proxy(
     {},

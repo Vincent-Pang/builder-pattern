@@ -64,5 +64,24 @@ describe('Builder', () => {
         c: true
       });
     });
+
+    it('should not modify the template object', () => {
+      const template: Testing = {
+        a: 10,
+        b: 'abc',
+        c: true
+      };
+
+      Builder(template)
+        .a(42)
+        .build();
+
+      expect(template).toEqual({
+        a: 10,
+        b: 'abc',
+        c: true
+      });
+    });
+
   });
 });
