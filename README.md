@@ -50,8 +50,10 @@ const modifiedUserInfo = Builder(defaultUserInfo)
                           .id(2)
                           .build();
 ```
-Note that with this approach, if the template object conforms to the interface, the
+Notes:
+- With this approach, if the template object conforms to the interface, the
 built object will, too.
+- The builder will effectively create and modify a shallow copy of the template object.
 
 ## Contributing
 
