@@ -6,6 +6,12 @@ interface Testing {
   c: boolean;
 }
 
+class TestingClass implements Testing {
+  public a!: number;
+  public b!: string;
+  public c!: boolean;
+}
+
 describe('Builder', () => {
   it('should build', () => {
     const builder = Builder<Testing>()
@@ -18,6 +24,21 @@ describe('Builder', () => {
       b: 'abc',
       c: true
     });
+  });
+
+  it('should build a class', () => {
+    const builder = Builder(TestingClass)
+        .a(10)
+        .b('abc')
+        .c(true);
+
+    const result = builder.build();
+    expect(result).toEqual({
+      a: 10,
+      b: 'abc',
+      c: true
+    });
+    expect(result).toBeInstanceOf(TestingClass);
   });
 
   it('might build broken objects if you do not pay attention', () => {
@@ -35,6 +56,16 @@ describe('Builder', () => {
     });
   });
 
+  it("won't build broken classes", () => {
+    const builder = Builder(TestingClass).a(10);
+    const built = builder.build();
+    expect(builder.build()).toEqual({
+      a: 10,
+      b: undefined,
+      c: undefined
+    });
+  });
+
   describe('with template object', () => {
     it('should build the template object', () => {
       const template: Testing = {
@@ -43,7 +74,7 @@ describe('Builder', () => {
         c: true
       };
 
-      const builder = Builder(template);
+      const builder = Builder<Testing>(template);
 
       expect(builder.build()).toEqual(template);
     });
@@ -65,6 +96,25 @@ describe('Builder', () => {
       });
     });
 
+    it('should build a modified class template', () => {
+      const template: Testing = {
+        a: 10,
+        b: 'abc',
+        c: true
+      };
+
+      const builder = Builder(TestingClass, template)
+          .a(42);
+
+      const result = builder.build();
+      expect(result).toEqual({
+        a: 42,
+        b: 'abc',
+        c: true
+      });
+      expect(result).toBeInstanceOf(TestingClass);
+    });
+
     it('should not modify the template object', () => {
       const template: Testing = {
         a: 10,
@@ -83,5 +133,21 @@ describe('Builder', () => {
       });
     });
 
+    it('should not modify the template class', () => {
+      const template: TestingClass = new TestingClass();
+      template.a = 10;
+      template.b = 'abc';
+      template.c = true;
+
+      Builder(template)
+          .a(42)
+          .build();
+
+      expect(template).toEqual({
+        a: 10,
+        b: 'abc',
+        c: true
+      });
+    });
   });
 });
