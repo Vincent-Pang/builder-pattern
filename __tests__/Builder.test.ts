@@ -74,7 +74,7 @@ describe('Builder', () => {
         c: true
       };
 
-      const builder = Builder<Testing>(template);
+      const builder = Builder(template);
 
       expect(builder.build()).toEqual(template);
     });
