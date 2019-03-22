@@ -55,6 +55,41 @@ Notes:
 built object will, too.
 - The builder will effectively create and modify a shallow copy of the template object.
 
+### Usage with class object
+
+You can also specify a class object.
+
+```
+class UserInfo {
+  id!: number;
+  userName!: string;
+  email!: string;
+}
+
+const userInfo = Builder(UserInfo)  // note that ( ) is used instead of < > here
+                   .id(1)
+                   .userName('foo')
+                   .email('foo@bar.baz')
+                   .build();
+
+```
+
+Moreover, you can also specify a class object with a template object.
+
+```
+class UserInfo {
+  id!: number;
+  userName!: string;
+  email!: string;
+}
+
+const userInfo = Builder(UserInfo, {id: 1, userName: 'foo'})
+                   .userName: 'foo bar'
+                   .email('foo@bar.baz')
+                   .build();
+
+```
+
 ## Contributing
 
 1. Fork it!
