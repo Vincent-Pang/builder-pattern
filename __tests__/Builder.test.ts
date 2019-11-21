@@ -4,6 +4,7 @@ interface Testing {
   a: number;
   b: string;
   c: boolean;
+  d?: number;
 }
 
 class TestingClass implements Testing {
@@ -49,17 +50,34 @@ describe('Builder', () => {
     // object not matching the type
     const built = builder.build();
 
-    expect(builder.build()).toEqual({
+    expect(built).toEqual({
       a: 10,
       b: undefined,
       c: undefined
     });
   });
 
+  it('will set methods as required', () => {
+    // Note that d is optional, however it's set method is not
+    const builder = Builder<Testing>()
+        .a(10)
+        .b('abc')
+        .c(true)
+        .d(20);
+    const result = builder.build();
+
+    expect(result).toEqual({
+      a: 10,
+      b: 'abc',
+      c: true,
+      d: 20
+    });
+  });
+
   it("won't build broken classes", () => {
     const builder = Builder(TestingClass).a(10);
     const built = builder.build();
-    expect(builder.build()).toEqual({
+    expect(built).toEqual({
       a: 10,
       b: undefined,
       c: undefined
