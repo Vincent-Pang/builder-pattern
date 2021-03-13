@@ -20,12 +20,12 @@ interface UserInfo {
 
 const userInfo = Builder<UserInfo>()
                    .id(1)
-                   .userName('Vincent')
-                   .email('abc@abc.com')
+                   .userName('foo')
+                   .email('foo@bar.baz')
                    .build();
 ```
 A note of caution: when building objects from scratch, the builder currently cannot ensure that all
-mandatory fields have been set. The built object might thus violate the contract of the given interface. 
+mandatory fields have been set. The built object might thus violate the contract of the given interface.
 For example, the following will compile (see also the example in the tests):
 
 ```
@@ -36,7 +36,7 @@ A way around this is to use template objects, see next section.
 
 ### Usage with template objects
 
-You can also specify a template object, which allows easy creation of variation of objects. 
+You can also specify a template object, which allows easy creation of variation of objects.
 This is especially useful for making test data setup more readable:
 
 ```
@@ -84,7 +84,7 @@ class UserInfo {
 }
 
 const userInfo = Builder(UserInfo, {id: 1, userName: 'foo'})
-                   .userName: 'foo bar'
+                   .userName:('foo bar')
                    .email('foo@bar.baz')
                    .build();
 
@@ -100,7 +100,7 @@ const userInfo = Builder(UserInfo, {id: 1, userName: 'foo'})
 
 ## Credits
 
-The idea is by unional and jcalz.  
+The idea is by unional and jcalz.
 Please refer to the [stackoverflow question](https://stackoverflow.com/questions/45291644/builder-pattern-using-typescript-interfaces).
 
 ## License

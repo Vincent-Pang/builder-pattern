@@ -1,0 +1,11 @@
+# IntelliJ project files
+.idea
+
+node_modules/
+/src/**/*.js
+/src/**/*.js.map
+/__tests__/**/*.js
+/__tests__/**/*.js.map
+/test_coverage_dir
+/dist/
+/package/
