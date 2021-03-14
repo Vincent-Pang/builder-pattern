@@ -1,8 +1,0 @@
-{
-  "extends": ["tslint:recommended"],
-  "rules": {
-    "trailing-comma": false,
-    "quotemark": [true, "single", "avoid-escape"],
-    "interface-name": false
-  }
-}

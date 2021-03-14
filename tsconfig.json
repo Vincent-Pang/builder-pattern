@@ -9,7 +9,8 @@
     "removeComments": false,
     "strict": true,
     "strictNullChecks": true,
-    "declaration": false
+    "declaration": false,
+    "outDir": "dist"
   },
   "include": [
     "src/**/*.ts",
