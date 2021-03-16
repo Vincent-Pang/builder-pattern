@@ -11,7 +11,7 @@ yarn add builder-pattern
 ## Usage
 
 ### Basic usage
-```
+```typescript
 interface UserInfo {
   id: number;
   userName: string;
@@ -28,18 +28,20 @@ A note of caution: when building objects from scratch, the builder currently can
 mandatory fields have been set. The built object might thus violate the contract of the given interface.
 For example, the following will compile (see also the example in the tests):
 
-```
+```typescript
 const brokenUserInfo = Builder<UserInfo>()
                          .build();
 ```
 A way around this is to use template objects, see next section.
+
+Another way is to use StrictBuilder.
 
 ### Usage with template objects
 
 You can also specify a template object, which allows easy creation of variation of objects.
 This is especially useful for making test data setup more readable:
 
-```
+```typescript
 const defaultUserInfo: UserInfo = {
   id: 1,
   userName: 'foo',
@@ -59,7 +61,7 @@ built object will, too.
 
 You can also specify a class object.
 
-```
+```typescript
 class UserInfo {
   id!: number;
   userName!: string;
@@ -76,7 +78,7 @@ const userInfo = Builder(UserInfo)  // note that ( ) is used instead of < > here
 
 Moreover, you can also specify a class object with a template object.
 
-```
+```typescript
 class UserInfo {
   id!: number;
   userName!: string;
@@ -89,6 +91,30 @@ const userInfo = Builder(UserInfo, {id: 1, userName: 'foo'})
                    .build();
 
 ```
+
+### Usage with StrictBuilder
+
+`StrictBuilder` is used to make sure all variables are initialized.
+
+```typescript
+const userInfo = StrictBuilder<UserInfo>()
+                   .id(1)
+                   .build(); \\ This expression is not callable.
+                             \\ Type 'never' has no call signatures.ts(2349)
+```
+
+All variables must be initialized before calling `build()`.
+
+```typescript
+const userInfo = StrictBuilder<UserInfo>()
+                   .id(1)
+                   .userName('foo')
+                   .email('foo@bar.baz')
+                   .build();  \\ build() is called successfully
+```
+
+Notes:
+`StrictBuilder` does not support template object nor class.
 
 ## Contributing
 

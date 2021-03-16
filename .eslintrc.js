@@ -33,5 +33,6 @@ module.exports = {
         "@typescript-eslint/tslint"
     ],
     "rules": {
+        "@typescript-eslint/no-inferrable-types": ["error", {"ignoreParameters": false, "ignoreProperties": true}]
     }
 };
