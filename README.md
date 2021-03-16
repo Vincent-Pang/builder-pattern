@@ -97,6 +97,12 @@ const userInfo = Builder(UserInfo, {id: 1, userName: 'foo'})
 `StrictBuilder` is used to make sure all variables are initialized.
 
 ```typescript
+interface UserInfo {
+  id: number;
+  userName: string;
+  email: string;
+}
+
 const userInfo = StrictBuilder<UserInfo>()
                    .id(1)
                    .build(); \\ This expression is not callable.
