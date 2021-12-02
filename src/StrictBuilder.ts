@@ -18,7 +18,7 @@ export function StrictBuilder<T>(): IStrictBuilder<T> {
   const Strictbuilder = new Proxy(
     {},
     {
-      get(target, prop) {
+      get(target: {} , prop: PropertyKey) {
         if ('build' === prop) {
           return () => built;
         }

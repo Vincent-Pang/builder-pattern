@@ -15,7 +15,7 @@ type Clazz<T> = new(...args: unknown[]) => T;
  * @param type the name of the class to instantiate.
  * @param template optional class partial which the builder will derive initial params from.
  */
-export function Builder<T>(type: Clazz<T>, template?: Partial<T>): IBuilder<T>;
+export function BobTheBuilder<T>(type: Clazz<T>, template?: Partial<T>): IBuilder<T>;
 
 /**
  * Create a Builder for an interface. Returned objects will be untyped.
@@ -24,10 +24,11 @@ export function Builder<T>(type: Clazz<T>, template?: Partial<T>): IBuilder<T>;
  *
  * @param template optional partial object which the builder will derive initial params from.
  */
-export function Builder<T>(template?: Partial<T>): IBuilder<T>;
+export function BobTheBuilder<T>(template?: Partial<T>): IBuilder<T>;
 
-export function Builder<T>(typeOrTemplate?: Clazz<T> | Partial<T>,
-                           template?: Partial<T>): IBuilder<T> {
+export function BobTheBuilder<T>(
+  typeOrTemplate?: Clazz<T> | Partial<T>,
+  template?: Partial<T>): IBuilder<T> {
   let type: Clazz<T> | undefined;
   if (typeOrTemplate instanceof Function) {
     type = typeOrTemplate;
@@ -40,7 +41,7 @@ export function Builder<T>(typeOrTemplate?: Clazz<T> | Partial<T>,
   const builder = new Proxy(
     {},
     {
-      get(target, prop) {
+      get(target: {}, prop: PropertyKey) {
         if ('build' === prop) {
           if (type) {
             // A class name (identified by the constructor) was passed. Instantiate it with props.
