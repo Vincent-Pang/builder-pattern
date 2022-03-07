@@ -1,4 +1,4 @@
-import { BobTheBuilder } from '../';
+import { BobTheBuilder } from '../src';
 
 interface Testing {
   a: number;
