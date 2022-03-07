@@ -1,2 +1,2 @@
-export * from './BobTheBuilder';
+export * from './Builder';
 export * from './StrictBuilder';

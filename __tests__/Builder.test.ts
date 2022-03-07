@@ -1,4 +1,4 @@
-import { BobTheBuilder } from '../src';
+import { Builder } from '../src/index';
 
 interface Testing {
   a: number;
@@ -15,7 +15,7 @@ class TestingClass implements Testing {
 
 describe('Builder', () => {
   it('should build', () => {
-    const builder = BobTheBuilder<Testing>()
+    const builder = Builder<Testing>()
       .a(10)
       .b('abc')
       .c(true);
@@ -28,7 +28,7 @@ describe('Builder', () => {
   });
 
   it('should build a class', () => {
-    const builder = BobTheBuilder(TestingClass)
+    const builder = Builder(TestingClass)
         .a(10)
         .b('abc')
         .c(true);
@@ -43,7 +43,7 @@ describe('Builder', () => {
   });
 
   it('might build broken objects if you do not pay attention', () => {
-    const builder = BobTheBuilder<Testing>().a(10);
+    const builder = Builder<Testing>().a(10);
 
     // Note that the builder does not check that all
     // mandatory fields have been set, and returns an
@@ -59,7 +59,7 @@ describe('Builder', () => {
 
   it('will set methods as required', () => {
     // Note that d is optional, however it's set method is not
-    const builder = BobTheBuilder<Testing>()
+    const builder = Builder<Testing>()
         .a(10)
         .b('abc')
         .c(true)
@@ -74,8 +74,8 @@ describe('Builder', () => {
     });
   });
 
-  it('won\'t build broken classes', () => {
-    const builder = BobTheBuilder(TestingClass).a(10);
+  it("won't build broken classes", () => {
+    const builder = Builder(TestingClass).a(10);
     const built = builder.build();
     expect(built).toEqual({
       a: 10,
@@ -92,7 +92,7 @@ describe('Builder', () => {
         c: true
       };
 
-      const builder = BobTheBuilder(template);
+      const builder = Builder(template);
 
       expect(builder.build()).toEqual(template);
     });
@@ -104,7 +104,7 @@ describe('Builder', () => {
         c: true
       };
 
-      const builder = BobTheBuilder(template)
+      const builder = Builder(template)
         .a(42);
 
       expect(builder.build()).toEqual({
@@ -121,7 +121,7 @@ describe('Builder', () => {
         c: true
       };
 
-      const builder = BobTheBuilder(TestingClass, template)
+      const builder = Builder(TestingClass, template)
           .a(42);
 
       const result = builder.build();
@@ -140,7 +140,7 @@ describe('Builder', () => {
         c: true
       };
 
-      BobTheBuilder(template)
+      Builder(template)
         .a(42)
         .build();
 
@@ -157,7 +157,7 @@ describe('Builder', () => {
       template.b = 'abc';
       template.c = true;
 
-      BobTheBuilder(template)
+      Builder(template)
           .a(42)
           .build();
 
