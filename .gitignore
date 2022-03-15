@@ -7,5 +7,4 @@ node_modules/
 /__tests__/**/*.js
 /__tests__/**/*.js.map
 /test_coverage_dir
-/dist/
 /package/

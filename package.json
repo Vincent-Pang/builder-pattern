@@ -7,10 +7,11 @@
     "build": "tsc",
     "test": "jest",
     "lint": "eslint -c .eslintrc.js --ext .ts src/**/*.ts __tests__/**/*.ts",
-    "prepublishOnly": "rm -rf dist && tsc --declaration --outDir dist"
+    "prepublishOnly": "tsc --declaration --outDir dist"
   },
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
+  "type": "module",
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
