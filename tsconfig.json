@@ -4,13 +4,13 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": false,
     "experimentalDecorators": true,
     "removeComments": false,
     "strict": true,
     "strictNullChecks": true,
     "declaration": false,
-    "outDir": "dist"
+    "outDir": "dist/cjs"
   },
   "include": [
     "src/**/*.ts",
