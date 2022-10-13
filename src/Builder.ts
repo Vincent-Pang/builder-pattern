@@ -1,5 +1,5 @@
 export type IBuilder<T> = {
-  [k in keyof T]-?: (arg: T[k]) => IBuilder<T>
+  [k in keyof T]-?: ((arg: T[k]) => IBuilder<T>) & (() => T[k]);
 }
 & {
   build(): T;
@@ -53,6 +53,11 @@ export function Builder<T>(typeOrTemplate?: Clazz<T> | Partial<T>,
         }
 
         return (x: unknown): unknown => {
+          // If no arguments passed return current value.
+          if (!arguments.length) {
+            return built[prop.toString()] || null;
+          }
+          
           built[prop.toString()] = x;
           return builder;
         };
