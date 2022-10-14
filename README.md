@@ -32,9 +32,21 @@ For example, the following will compile (see also the example in the tests):
 const brokenUserInfo = Builder<UserInfo>()
                          .build();
 ```
-A way around this is to use template objects, see next section.
+A way around this is to use template objects, see next section (Usage with template objects).
 
-Another way is to use StrictBuilder.
+Another way is to use StrictBuilder (see Usage with StrictBuilder).
+```typescript
+const builder = Builder<UserInfo>()
+                   .id(1)
+                   .userName('foo');
+
+builder.id();       // return 1
+builder.userName(); // return foo
+builder.email();    // return undefined
+
+const userInfo = builder.build();
+```
+If no argument passed, return current value.
 
 ### Usage with template objects
 
@@ -105,8 +117,8 @@ interface UserInfo {
 
 const userInfo = StrictBuilder<UserInfo>()
                    .id(1)
-                   .build(); \\ This expression is not callable.
-                             \\ Type 'never' has no call signatures.ts(2349)
+                   .build(); // This expression is not callable.
+                             // Type 'never' has no call signatures.ts(2349)
 ```
 
 All variables must be initialized before calling `build()`.
@@ -116,7 +128,7 @@ const userInfo = StrictBuilder<UserInfo>()
                    .id(1)
                    .userName('foo')
                    .email('foo@bar.baz')
-                   .build();  \\ build() is called successfully
+                   .build();  // build() is called successfully
 ```
 
 Notes:
