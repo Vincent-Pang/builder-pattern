@@ -45,20 +45,20 @@ export function Builder<T>(typeOrTemplate?: Clazz<T> | Partial<T>,
           if (type) {
             // A class name (identified by the constructor) was passed. Instantiate it with props.
             const obj: T = new type();
-            return () => Object.assign(obj, {...built});
+            return () => Object.assign(obj as any, {...built});
           } else {
             // No type information - just return the object.
             return () => built;
           }
         }
 
-        return (x: unknown): unknown => {
+        return (...args: unknown[]): unknown => {
           // If no arguments passed return current value.
-          if (!arguments.length) {
-            return built[prop.toString()] || null;
+          if (0 === args.length) {
+            return built[prop.toString()];
           }
           
-          built[prop.toString()] = x;
+          built[prop.toString()] = args[0];
           return builder;
         };
       }

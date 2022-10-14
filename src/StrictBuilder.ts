@@ -1,5 +1,5 @@
 export type IStrictBuilder<T, B = Record<string, unknown>> = {
-  [k in keyof T]-?: (arg: T[k]) => IStrictBuilder<T, B & Record<k, T[k]>>
+  [k in keyof T]-?: ((arg: T[k]) => IStrictBuilder<T, B & Record<k, T[k]>>) & (() => T[k]);
 }
 & {
   build: B extends T ? () => T : never
@@ -15,7 +15,7 @@ export function StrictBuilder<T>(): IStrictBuilder<T> {
 
   const built: Record<string, unknown> = {};
 
-  const Strictbuilder = new Proxy(
+  const strictbuilder = new Proxy(
     {},
     {
       get(target, prop) {
@@ -23,13 +23,18 @@ export function StrictBuilder<T>(): IStrictBuilder<T> {
           return () => built;
         }
 
-        return (x: unknown): unknown => {
-          built[prop.toString()] = x;
-          return Strictbuilder as IStrictBuilder<T>;
+        return (...args: unknown[]): unknown => {
+          // If no arguments passed return current value.
+          if (0 === args.length) {
+            return built[prop.toString()];
+          }
+          
+          built[prop.toString()] = args[0];
+          return strictbuilder as IStrictBuilder<T>;
         };
       }
     }
   );
 
-  return Strictbuilder as IStrictBuilder<T>;
+  return strictbuilder as IStrictBuilder<T>;
 }

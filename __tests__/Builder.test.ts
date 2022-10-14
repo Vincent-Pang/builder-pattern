@@ -168,4 +168,31 @@ describe('Builder', () => {
       });
     });
   });
+
+  it('if no arguments passed return current value.', () => {
+    // Note that d is optional, however it's set method is not
+    const builder = Builder<Testing>();
+
+    expect(builder.a()).toBeUndefined();
+    builder.a(10);
+    expect(builder.a()).toEqual(10);
+
+    expect(builder.d()).toBeUndefined();
+    builder.d(undefined);
+    expect(builder.d()).toBeUndefined();
+    builder.d(20);
+    expect(builder.d()).toEqual(20);
+
+    builder.b('abc');
+    builder.c(true);
+
+    const result = builder.build();
+
+    expect(result).toEqual({
+      a: 10,
+      b: 'abc',
+      c: true,
+      d: 20
+    });
+  });
 });

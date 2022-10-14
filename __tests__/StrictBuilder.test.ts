@@ -38,4 +38,27 @@ describe('StrictBuilder', () => {
     });
   });
 
+  it('if no arguments passed return current value.', () => {
+    const builder = StrictBuilder<Testing>()
+        .a(10)
+        .b('abc')
+        .c(true);
+
+    expect(builder.a()).toEqual(10);
+    expect(builder.b()).toEqual('abc');
+    expect(builder.c()).toBeTruthy()
+    expect(builder.d()).toBeUndefined();
+    builder.d(20);
+    expect(builder.d()).toEqual(20);
+    
+    const result = builder.build();
+
+    expect(result).toEqual({
+      a: 10,
+      b: 'abc',
+      c: true,
+      d: 20
+    });
+  });
+
 });
