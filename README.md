@@ -32,21 +32,22 @@ For example, the following will compile (see also the example in the tests):
 const brokenUserInfo = Builder<UserInfo>()
                          .build();
 ```
-A way around this is to use template objects, see next section (Usage with template objects).
+A way around this is to use template objects (see Usage with template objects).
 
 Another way is to use StrictBuilder (see Usage with StrictBuilder).
 ```typescript
-const builder = Builder<UserInfo>()
-                   .id(1)
-                   .userName('foo');
+const builder = Builder<UserInfo>();
 
+builder.id(1);
 builder.id();       // return 1
+
+builder.userName(); // return undefined
+builder.userName('foo');
 builder.userName(); // return foo
-builder.email();    // return undefined
 
 const userInfo = builder.build();
 ```
-If no argument passed, return current value.
+To get value from existing builder, just call the method without parameter, current value will be returned.
 
 ### Usage with template objects
 
