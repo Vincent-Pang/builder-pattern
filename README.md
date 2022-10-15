@@ -39,11 +39,11 @@ Another way is to use StrictBuilder (see Usage with StrictBuilder).
 const builder = Builder<UserInfo>();
 
 builder.id(1);
-builder.id();       // return 1
+console.log(builder.id());        // 1
 
-builder.userName(); // return undefined
+console.log(builder.userName());  // undefined
 builder.userName('foo');
-builder.userName(); // return foo
+console.log(builder.userName());  // foo
 
 const userInfo = builder.build();
 ```
