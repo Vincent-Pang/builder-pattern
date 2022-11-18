@@ -24,17 +24,7 @@ const userInfo = Builder<UserInfo>()
                    .email('foo@bar.baz')
                    .build();
 ```
-A note of caution: when building objects from scratch, the builder currently cannot ensure that all
-mandatory fields have been set. The built object might thus violate the contract of the given interface.
-For example, the following will compile (see also the example in the tests):
-
-```typescript
-const brokenUserInfo = Builder<UserInfo>()
-                         .build();
-```
-A way around this is to use template objects (see Usage with template objects).
-
-Another way is to use StrictBuilder (see Usage with StrictBuilder).
+To get value from existing builder, just call the method without parameter, current value will be returned.
 ```typescript
 const builder = Builder<UserInfo>();
 
@@ -47,7 +37,18 @@ console.log(builder.userName());  // foo
 
 const userInfo = builder.build();
 ```
-To get value from existing builder, just call the method without parameter, current value will be returned.
+
+A note of caution: when building objects from scratch, the builder currently cannot ensure that all
+mandatory fields have been set. The built object might thus violate the contract of the given interface.
+For example, the following will compile (see also the example in the tests):
+
+```typescript
+const brokenUserInfo = Builder<UserInfo>()
+                         .build();
+```
+A way around this is to use template objects (see Usage with template objects).
+
+Another way is to use StrictBuilder (see Usage with StrictBuilder).
 
 ### Usage with template objects
 
