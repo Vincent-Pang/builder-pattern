@@ -106,6 +106,24 @@ const userInfo = Builder(UserInfo, {id: 1, userName: 'foo'})
 
 ```
 
+### Usage with override objects
+You can specify a override object, which allows override values when calling build().
+This is useful for some cases:
+
+```typescript
+const overrideUserInfo: Partial<UserInfo> = {
+  email: 'testing@bar.baz'
+};
+
+const userInfo = Builder(null, overrideUserInfo)
+                   .id(1)
+                   .userName('foo')
+                   .email('foo@bar.baz')
+                   .build();  // email will be overrided when calling build()
+                   
+console.log(userInfo);  // { id: 1, userName: 'foo', email: 'testing@bar.baz' }
+```
+
 ### Usage with StrictBuilder
 
 `StrictBuilder` is used to make sure all variables are initialized.
