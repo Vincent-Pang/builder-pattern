@@ -1,7 +1,7 @@
 {
   "name": "builder-pattern",
   "repository": "https://github.com/Vincent-Pang/builder-pattern.git",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
   "scripts": {
     "build": "yarn run tsup ./src/index.ts --format cjs,esm",
