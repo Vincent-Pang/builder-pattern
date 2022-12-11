@@ -195,4 +195,17 @@ describe('Builder', () => {
       d: 20
     });
   });
+
+  it('override values', () => {
+    const builder = Builder<Testing>(null, {a: 20, c: false})
+      .a(10)
+      .b('abc')
+      .c(true);
+
+    expect(builder.build()).toEqual({
+      a: 20,
+      b: 'abc',
+      c: false
+    });
+  });
 });
