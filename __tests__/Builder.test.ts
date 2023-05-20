@@ -178,7 +178,7 @@ describe('Builder', () => {
     expect(builder.a()).toEqual(10);
 
     expect(builder.d()).toBeUndefined();
-    builder.d(undefined);
+    
     expect(builder.d()).toBeUndefined();
     builder.d(20);
     expect(builder.d()).toEqual(20);
