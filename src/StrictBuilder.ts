@@ -1,5 +1,5 @@
 export type IStrictBuilder<T, B = Record<string, unknown>> = {
-  [k in keyof T]-?: ((arg: T[k]) => IStrictBuilder<T, B & Record<k, T[k]>>) & (() => T[k]);
+  [k in keyof T]-?: ((arg: Exclude<T[k], undefined>) => IStrictBuilder<T, B & Record<k, T[k]>>) & (() => T[k]);
 }
 & {
   build: B extends T ? () => T : never
