@@ -154,6 +154,25 @@ const userInfo = StrictBuilder<UserInfo>()
 Notes:
 `StrictBuilder` does not support template object nor class.
 
+### Usage with makeSecure
+
+`makeSecure` is used to make sure all variables are initialized correctly, otherwise we should expect an exception.
+
+```typescript
+  class MyClass {
+    public property1!: string;
+    public property2!: string;
+ 
+    public static readonly builder = () => makeSecure(Builder(MyClass), (v) => {
+      if (v.property1 && v.property2) return;
+      throw new Error('Invalid state');
+    });
+  }
+
+  MyClass.builder().property1('1').build(); // will throw
+  MyClass.builder().property1('1').property2('2').build(); // ok
+```
+
 ## Contributing
 
 1. Fork it!
