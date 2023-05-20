@@ -1,6 +1,8 @@
 # IntelliJ project files
 .idea
 
+.vscode
+
 node_modules/
 /src/**/*.js
 /src/**/*.js.map
