@@ -1,5 +1,5 @@
 export type IBuilder<T> = {
-  [k in keyof T]-?: ((arg: T[k]) => IBuilder<T>) & (() => T[k]);
+  [k in keyof T & string as T[k] extends ((...args: any[]) => any) ? never : `${k}`]-?: ((arg: T[k]) => IBuilder<T>) & (() => T[k]);
 }
 & {
   build(): T;
