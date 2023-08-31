@@ -31,17 +31,26 @@
     "build": "skuba build-package",
     "format": "skuba format",
     "lint": "skuba lint",
-    "release": "skuba release",
     "test": "skuba test --coverage",
-    "test:watch": "skuba test --watch"
+    "test:watch": "skuba test --watch",
+    "preinstall": "npx only-allow pnpm",
+    "release": "changeset publish",
+    "changeset-version": "changeset version && prettier --write ."
   },
   "devDependencies": {
     "skuba": "7.1.1"
+  },
+  "packageManager": "pnpm@8.7.0",
+  "publishConfig": {
+    "provenance": true
   },
   "skuba": {
     "entryPoint": "src/index.ts",
     "template": null,
     "type": "package",
     "version": "7.1.1"
+  },
+  "volta": {
+    "node": "18.12.1"
   }
 }
