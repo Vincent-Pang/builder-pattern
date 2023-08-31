@@ -10,10 +10,9 @@
     "strict": true,
     "strictNullChecks": true,
     "declaration": false,
-    "outDir": "dist/cjs"
+    "outDir": "lib",
+    "lib": ["ES2022"]
   },
-  "include": [
-    "src/**/*.ts",
-    "__tests__/**/*.ts"
-  ]
+  "exclude": ["lib*/**/*"],
+  "extends": "skuba/config/tsconfig.json"
 }

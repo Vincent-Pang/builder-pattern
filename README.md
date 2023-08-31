@@ -21,8 +21,8 @@ interface UserInfo {
 
 const userInfo = mockBuilder<UserInfo>()
   .id(1)
-  .userName("foo")
-  .email("foo@bar.baz")
+  .userName('foo')
+  .email('foo@bar.baz')
   .build();
 ```
 
@@ -43,8 +43,8 @@ Another way is to use StrictmockBuilder (see Usage with StrictmockBuilder).
 ```typescript
 const baseUserInfo = mockBuilder<UserInfo>()
   .id(1)
-  .userName("foo")
-  .email("foo@bar.baz");
+  .userName('foo')
+  .email('foo@bar.baz');
 
 const userInfo = baseUserInfo.id(2).build();
 // {
@@ -69,8 +69,8 @@ This is especially useful for making test data setup more readable:
 ```typescript
 const defaultUserInfo: UserInfo = {
   id: 1,
-  userName: "foo",
-  email: "foo@bar.baz",
+  userName: 'foo',
+  email: 'foo@bar.baz',
 };
 
 const modifiedUserInfo = mockBuilder(defaultUserInfo).id(2).build();
@@ -95,8 +95,8 @@ class UserInfo {
 
 const userInfo = mockBuilder(UserInfo) // note that ( ) is used instead of < > here
   .id(1)
-  .userName("foo")
-  .email("foo@bar.baz")
+  .userName('foo')
+  .email('foo@bar.baz')
   .build();
 ```
 
@@ -136,8 +136,8 @@ All variables must be initialized before calling `build()`.
 ```typescript
 const userInfo = StrictmockBuilder<UserInfo>()
   .id(1)
-  .userName("foo")
-  .email("foo@bar.baz")
+  .userName('foo')
+  .email('foo@bar.baz')
   .build(); // build() is called successfully
 ```
 
