@@ -154,15 +154,15 @@ describe("Builder", () => {
     });
   });
 
-  it("todo", () => {
-    type Foo = { type: "AdProduct" | "AdBudget" };
-    const builder = mockBuilder<Foo>();
+  it("preserves the state of a previous builder when modifying a builder", () => {
+    type Product = { type: "foo" | "bar" };
+    const builder = mockBuilder<Product>();
 
-    const baseObject = builder.type("AdBudget");
+    const baseObject = builder.type("foo");
 
-    const testObject = baseObject.type("AdProduct");
+    const testObject = baseObject.type("bar");
 
-    expect(baseObject.build()).toEqual({ type: "AdBudget" });
-    expect(testObject.build()).toEqual({ type: "AdProduct" });
+    expect(baseObject.build()).toEqual({ type: "foo" });
+    expect(testObject.build()).toEqual({ type: "bar" });
   });
 });
