@@ -1,16 +1,17 @@
-# builder-pattern
+# mock-builder
 
-Create a builder pattern for Typescript using ES6 proxy.
+Create reusable mocks using the builder pattern in Typescript
 
 ## Installation
 
 ```
-yarn add builder-pattern
+yarn add mock-builder
 ```
 
 ## Usage
 
 ### Basic usage
+
 ```typescript
 interface UserInfo {
   id: number;
@@ -18,24 +19,11 @@ interface UserInfo {
   email: string;
 }
 
-const userInfo = Builder<UserInfo>()
-                   .id(1)
-                   .userName('foo')
-                   .email('foo@bar.baz')
-                   .build();
-```
-To get value from existing builder, just call the method without parameter, current value will be returned.
-```typescript
-const builder = Builder<UserInfo>();
-
-builder.id(1);
-console.log(builder.id());        // 1
-
-console.log(builder.userName());  // undefined
-builder.userName('foo');
-console.log(builder.userName());  // foo
-
-const userInfo = builder.build();
+const userInfo = mockBuilder<UserInfo>()
+  .id(1)
+  .userName("foo")
+  .email("foo@bar.baz")
+  .build();
 ```
 
 A note of caution: when building objects from scratch, the builder currently cannot ensure that all
@@ -43,12 +31,35 @@ mandatory fields have been set. The built object might thus violate the contract
 For example, the following will compile (see also the example in the tests):
 
 ```typescript
-const brokenUserInfo = Builder<UserInfo>()
-                         .build();
+const brokenUserInfo = mockBuilder<UserInfo>().build();
 ```
+
 A way around this is to use template objects (see Usage with template objects).
 
-Another way is to use StrictBuilder (see Usage with StrictBuilder).
+Another way is to use StrictmockBuilder (see Usage with StrictmockBuilder).
+
+### Reusing builder instances
+
+```typescript
+const baseUserInfo = mockBuilder<UserInfo>()
+  .id(1)
+  .userName("foo")
+  .email("foo@bar.baz");
+
+const userInfo = baseUserInfo.id(2).build();
+// {
+//   id: 2,
+//   userName: "foo",
+//   email: "foo@bar.baz"
+// }
+
+const otherUserInfo = baseUserInfo.id(3).build();
+// {
+//   id: 3,
+//   userName: "foo",
+//   email: "foo@bar.baz"
+// }
+```
 
 ### Usage with template objects
 
@@ -58,17 +69,17 @@ This is especially useful for making test data setup more readable:
 ```typescript
 const defaultUserInfo: UserInfo = {
   id: 1,
-  userName: 'foo',
-  email: 'foo@bar.baz'
+  userName: "foo",
+  email: "foo@bar.baz",
 };
 
-const modifiedUserInfo = Builder(defaultUserInfo)
-                          .id(2)
-                          .build();
+const modifiedUserInfo = mockBuilder(defaultUserInfo).id(2).build();
 ```
+
 Notes:
+
 - With this approach, if the template object conforms to the interface, the
-built object will, too.
+  built object will, too.
 - The builder will effectively create and modify a shallow copy of the template object.
 
 ### Usage with class object
@@ -82,12 +93,11 @@ class UserInfo {
   email!: string;
 }
 
-const userInfo = Builder(UserInfo)  // note that ( ) is used instead of < > here
-                   .id(1)
-                   .userName('foo')
-                   .email('foo@bar.baz')
-                   .build();
-
+const userInfo = mockBuilder(UserInfo) // note that ( ) is used instead of < > here
+  .id(1)
+  .userName("foo")
+  .email("foo@bar.baz")
+  .build();
 ```
 
 Moreover, you can also specify a class object with a template object.
@@ -99,34 +109,16 @@ class UserInfo {
   email!: string;
 }
 
-const userInfo = Builder(UserInfo, {id: 1, userName: 'foo'})
+const userInfo = mockBuilder(UserInfo, {id: 1, userName: 'foo'})
                    .userName:('foo bar')
                    .email('foo@bar.baz')
                    .build();
 
 ```
 
-### Usage with override objects
-You can specify a override object, which allows override values when calling build().
-This is useful for some cases:
+### Usage with StrictmockBuilder
 
-```typescript
-const overrideUserInfo: Partial<UserInfo> = {
-  email: 'testing@bar.baz'
-};
-
-const userInfo = Builder(null, overrideUserInfo)
-                   .id(1)
-                   .userName('foo')
-                   .email('foo@bar.baz')
-                   .build();  // email will be overrided when calling build()
-                   
-console.log(userInfo);  // { id: 1, userName: 'foo', email: 'testing@bar.baz' }
-```
-
-### Usage with StrictBuilder
-
-`StrictBuilder` is used to make sure all variables are initialized.
+`StrictmockBuilder` is used to make sure all variables are initialized.
 
 ```typescript
 interface UserInfo {
@@ -135,24 +127,22 @@ interface UserInfo {
   email: string;
 }
 
-const userInfo = StrictBuilder<UserInfo>()
-                   .id(1)
-                   .build(); // This expression is not callable.
-                             // Type 'never' has no call signatures.ts(2349)
+const userInfo = StrictmockBuilder<UserInfo>().id(1).build(); // This expression is not callable.
+// Type 'never' has no call signatures.ts(2349)
 ```
 
 All variables must be initialized before calling `build()`.
 
 ```typescript
-const userInfo = StrictBuilder<UserInfo>()
-                   .id(1)
-                   .userName('foo')
-                   .email('foo@bar.baz')
-                   .build();  // build() is called successfully
+const userInfo = StrictmockBuilder<UserInfo>()
+  .id(1)
+  .userName("foo")
+  .email("foo@bar.baz")
+  .build(); // build() is called successfully
 ```
 
 Notes:
-`StrictBuilder` does not support template object nor class.
+`StrictmockBuilder` does not support classes.
 
 ## Contributing
 
@@ -164,8 +154,7 @@ Notes:
 
 ## Credits
 
-The idea is by unional and jcalz.
-Please refer to the [stackoverflow question](https://stackoverflow.com/questions/45291644/builder-pattern-using-typescript-interfaces).
+https://github.com/Vincent-Pang/builder-pattern is the original repository that this was forked from.
 
 ## License
 

@@ -1,2 +1,2 @@
-export * from './Builder';
-export * from './StrictBuilder';
+export * from "./mockBuilder";
+export * from "./strictMockBuilder";
