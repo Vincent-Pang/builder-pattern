@@ -34,7 +34,7 @@
     "test": "skuba test --coverage",
     "test:watch": "skuba test --watch",
     "preinstall": "npx only-allow pnpm",
-    "release": "changeset publish",
+    "release": "pnpm build && changeset publish",
     "changeset-version": "changeset version && prettier --write ."
   },
   "devDependencies": {
