@@ -1,4 +1,4 @@
-import { mockBuilder } from "./index";
+import { mockBuilder } from './index';
 
 interface Testing {
   a: number;
@@ -13,31 +13,31 @@ class TestingClass implements Testing {
   public c!: boolean;
 }
 
-describe("Builder", () => {
-  it("should build", () => {
-    const builder = mockBuilder<Testing>().a(10).b("abc").c(true);
+describe('Builder', () => {
+  it('should build', () => {
+    const builder = mockBuilder<Testing>().a(10).b('abc').c(true);
 
     expect(builder.build()).toEqual({
       a: 10,
-      b: "abc",
+      b: 'abc',
       c: true,
     });
   });
 
-  it("should build a class", () => {
-    const builder = mockBuilder(TestingClass).a(10).b("abc").c(true);
+  it('should build a class', () => {
+    const builder = mockBuilder(TestingClass).a(10).b('abc').c(true);
 
     const result = builder.build();
     expect(result).toEqual({
       a: 10,
-      b: "abc",
+      b: 'abc',
       c: true,
     });
 
     expect(result).toBeInstanceOf(TestingClass);
   });
 
-  it("might build broken objects if you do not pay attention", () => {
+  it('might build broken objects if you do not pay attention', () => {
     const builder = mockBuilder<Testing>().a(10);
 
     // Note that the builder does not check that all
@@ -52,14 +52,14 @@ describe("Builder", () => {
     });
   });
 
-  it("will set methods as required", () => {
+  it('will set methods as required', () => {
     // Note that d is optional, however it's set method is not
-    const builder = mockBuilder<Testing>().a(10).b("abc").c(true).d(20);
+    const builder = mockBuilder<Testing>().a(10).b('abc').c(true).d(20);
     const result = builder.build();
 
     expect(result).toEqual({
       a: 10,
-      b: "abc",
+      b: 'abc',
       c: true,
       d: 20,
     });
@@ -75,11 +75,11 @@ describe("Builder", () => {
     });
   });
 
-  describe("with template object", () => {
-    it("should build the template object", () => {
+  describe('with template object', () => {
+    it('should build the template object', () => {
       const template: Testing = {
         a: 10,
-        b: "abc",
+        b: 'abc',
         c: true,
       };
 
@@ -88,10 +88,10 @@ describe("Builder", () => {
       expect(builder.build()).toEqual(template);
     });
 
-    it("should build a modified template object", () => {
+    it('should build a modified template object', () => {
       const template: Testing = {
         a: 10,
-        b: "abc",
+        b: 'abc',
         c: true,
       };
 
@@ -99,15 +99,15 @@ describe("Builder", () => {
 
       expect(builder.build()).toEqual({
         a: 42,
-        b: "abc",
+        b: 'abc',
         c: true,
       });
     });
 
-    it("should build a modified class template", () => {
+    it('should build a modified class template', () => {
       const template: Testing = {
         a: 10,
-        b: "abc",
+        b: 'abc',
         c: true,
       };
 
@@ -116,16 +116,16 @@ describe("Builder", () => {
       const result = builder.build();
       expect(result).toEqual({
         a: 42,
-        b: "abc",
+        b: 'abc',
         c: true,
       });
       expect(result).toBeInstanceOf(TestingClass);
     });
 
-    it("should not modify the template object", () => {
+    it('should not modify the template object', () => {
       const template: Testing = {
         a: 10,
-        b: "abc",
+        b: 'abc',
         c: true,
       };
 
@@ -133,36 +133,36 @@ describe("Builder", () => {
 
       expect(template).toEqual({
         a: 10,
-        b: "abc",
+        b: 'abc',
         c: true,
       });
     });
 
-    it("should not modify the template class", () => {
+    it('should not modify the template class', () => {
       const template: TestingClass = new TestingClass();
       template.a = 10;
-      template.b = "abc";
+      template.b = 'abc';
       template.c = true;
 
       mockBuilder(template).a(42).build();
 
       expect(template).toEqual({
         a: 10,
-        b: "abc",
+        b: 'abc',
         c: true,
       });
     });
   });
 
-  it("preserves the state of a previous builder when modifying a builder", () => {
-    type Product = { type: "foo" | "bar" };
+  it('preserves the state of a previous builder when modifying a builder', () => {
+    type Product = { type: 'foo' | 'bar' };
     const builder = mockBuilder<Product>();
 
-    const baseObject = builder.type("foo");
+    const baseObject = builder.type('foo');
 
-    const testObject = baseObject.type("bar");
+    const testObject = baseObject.type('bar');
 
-    expect(baseObject.build()).toEqual({ type: "foo" });
-    expect(testObject.build()).toEqual({ type: "bar" });
+    expect(baseObject.build()).toEqual({ type: 'foo' });
+    expect(testObject.build()).toEqual({ type: 'bar' });
   });
 });

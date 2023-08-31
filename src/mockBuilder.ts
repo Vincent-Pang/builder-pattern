@@ -11,12 +11,12 @@ type Clazz<T> = new (...args: unknown[]) => T;
  *
  * e.g. let obj: MyClass = Builder(MyClass).setA(5).setB("str").build();
  *
- * @param type the name of the class to instantiate.
- * @param template optional class partial which the builder will derive initial params from.
+ * @param type - the name of the class to instantiate.
+ * @param template - optional class partial which the builder will derive initial params from.
  */
 export function mockBuilder<T>(
   type: Clazz<T>,
-  template?: Partial<T> | null
+  template?: Partial<T> | null,
 ): IBuilder<T>;
 
 /**
@@ -24,19 +24,19 @@ export function mockBuilder<T>(
  *
  * e.g. let obj: Interface = Builder<Interface>().setA(5).setB("str").build();
  *
- * @param template optional partial object which the builder will derive initial params from.
+ * @param template - optional partial object which the builder will derive initial params from.
  */
 export function mockBuilder<T>(template?: Partial<T> | null): IBuilder<T>;
 
 export function mockBuilder<T>(
   typeOrTemplate?: Clazz<T> | Partial<T> | null,
-  templateOrOverride?: Partial<T> | null
+  templateOrOverride?: Partial<T> | null,
 ): IBuilder<T> {
-  let type: Clazz<T> | undefined;
+  let Type: Clazz<T> | undefined;
   let template: Partial<T> | null | undefined;
 
   if (typeOrTemplate instanceof Function) {
-    type = typeOrTemplate;
+    Type = typeOrTemplate;
     template = templateOrOverride;
   } else {
     template = typeOrTemplate;
@@ -50,30 +50,29 @@ export function mockBuilder<T>(
     {},
     {
       get(target, prop) {
-        if ("build" === prop) {
-          if (type) {
+        if (prop === 'build') {
+          if (Type) {
             // A class name (identified by the constructor) was passed. Instantiate it with props.
-            const obj: T = new type();
+            const obj: T = new Type();
             return () =>
               Object.assign(obj as T & Record<string, unknown>, { ...built });
-          } else {
-            // No type information - just return the object.
-            return () => built;
           }
+          // No type information - just return the object.
+          return () => built;
         }
 
         return (...args: unknown[]): unknown => {
           const updatedFields = { ...built, [prop.toString()]: args[0] };
 
-          if (type) {
+          if (Type) {
             // A class name (identified by the constructor) was passed. Instantiate it with props.
-            return mockBuilder(type, updatedFields as Partial<T>);
+            return mockBuilder(Type, updatedFields as Partial<T>);
           }
 
           return mockBuilder(updatedFields);
         };
       },
-    }
+    },
   );
 
   return builder as IBuilder<T>;

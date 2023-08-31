@@ -1,11 +1,32 @@
-# IntelliJ project files
-.idea
+# managed by skuba
+.idea/*
+.vscode/*
 
-node_modules/
+.cdk.staging/
+.serverless/
+cdk.out/
+node_modules*/
+
+/coverage*/
+/dist*/
+/lib*/
+/tmp*/
+
+.DS_Store
+.eslintcache
+.npmrc
+*.tgz
+*.tsbuildinfo
+npm-debug.log
+package-lock.json
+yarn-error.log
+# end managed by skuba
+
+# IntelliJ project files
+
 /src/**/*.js
 /src/**/*.js.map
 /__tests__/**/*.js
 /__tests__/**/*.js.map
 /test_coverage_dir
-/dist/
 /package/

@@ -19,7 +19,7 @@ export function strictMockBuilder<T>(template?: Partial<T>): IStrictBuilder<T> {
     {},
     {
       get(target, prop) {
-        if ("build" === prop) {
+        if (prop === 'build') {
           return () => built;
         }
 
@@ -28,7 +28,7 @@ export function strictMockBuilder<T>(template?: Partial<T>): IStrictBuilder<T> {
           return strictMockBuilder(updatedFields);
         };
       },
-    }
+    },
   );
 
   return strictbuilder as IStrictBuilder<T>;
