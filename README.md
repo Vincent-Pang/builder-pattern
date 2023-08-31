@@ -38,6 +38,29 @@ A way around this is to use template objects (see Usage with template objects).
 
 Another way is to use StrictmockBuilder (see Usage with StrictmockBuilder).
 
+### Reusing builder instances
+
+```typescript
+const baseUserInfo = mockBuilder<UserInfo>()
+  .id(1)
+  .userName("foo")
+  .email("foo@bar.baz");
+
+const userInfo = baseUserInfo.id(2).build();
+// {
+//   id: 2,
+//   userName: "foo",
+//   email: "foo@bar.baz"
+// }
+
+const otherUserInfo = baseUserInfo.id(3).build();
+// {
+//   id: 3,
+//   userName: "foo",
+//   email: "foo@bar.baz"
+// }
+```
+
 ### Usage with template objects
 
 You can also specify a template object, which allows easy creation of variation of objects.
