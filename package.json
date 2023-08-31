@@ -1,14 +1,14 @@
 {
-  "name": "mock-builder",
+  "name": "mock-build",
   "version": "1.0.0",
   "private": false,
-  "homepage": "https://github.com/seek-oss/mock-builder#readme",
+  "homepage": "https://github.com/seek-oss/mock-build#readme",
   "bugs": {
-    "url": "https://github.com/seek-oss/mock-builder/issues"
+    "url": "https://github.com/seek-oss/mock-build/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seek-oss/mock-builder.git"
+    "url": "git+https://github.com/seek-oss/mock-build.git"
   },
   "license": "MIT",
   "exports": {

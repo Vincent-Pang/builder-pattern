@@ -1,16 +1,16 @@
-# mock-builder
+# mock-build
 
-[![npm package](https://img.shields.io/npm/v/mock-builder)](https://www.npmjs.com/package/mock-builder)
+[![npm package](https://img.shields.io/npm/v/mock-build)](https://www.npmjs.com/package/mock-build)
 [![Node.js version](https://img.shields.io/badge/node-%3E%3D%2018.12-brightgreen)](https://nodejs.org/en/)
-[![GitHub Release](https://github.com/seek-oss/mock-builder/workflows/Release/badge.svg?branch=master)](https://github.com/seek-oss/mock-builder/actions?query=workflow%3ARelease)
-[![GitHub Test](https://github.com/seek-oss/mock-builder/workflows/Test/badge.svg?branch=master)](https://github.com/seek-oss/mock-builder/actions?query=workflow%3ATest)
+[![GitHub Release](https://github.com/seek-oss/mock-build/workflows/Release/badge.svg?branch=master)](https://github.com/seek-oss/mock-build/actions?query=workflow%3ARelease)
+[![GitHub Test](https://github.com/seek-oss/mock-build/workflows/Test/badge.svg?branch=master)](https://github.com/seek-oss/mock-build/actions?query=workflow%3ATest)
 
 Create reusable mocks using the builder pattern in Typescript
 
 ## Installation
 
 ```
-yarn add mock-builder
+yarn add mock-build
 ```
 
 ## Usage
