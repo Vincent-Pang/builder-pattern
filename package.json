@@ -1,6 +1,6 @@
 {
-  "name": "builder-pattern",
-  "version": "2.2.0",
+  "name": "mock-builder",
+  "version": "1.0.0",
   "private": false,
   "homepage": "https://github.com/Vincent-Pang/builder-pattern#readme",
   "bugs": {
